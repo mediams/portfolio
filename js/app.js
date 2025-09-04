@@ -6,8 +6,8 @@
   const d = "ed.bew".split("").reverse().join("");  
   const email = `${u}@${d}`;
 
-  // const subject = "Collaboration request";
-  // const body = "Hello Eugene,\n\nI saw your landing and would like to discuss a project.";
+  const subject = "";
+  const body = "";
 
   const params = new URLSearchParams({
     to: email, 
