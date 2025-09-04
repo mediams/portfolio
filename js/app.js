@@ -1,35 +1,22 @@
 (() => {
-        const link = document.getElementById("contactLink");
+  const link = document.getElementById("contactLink");
+  if (!link) return;
 
-        // имя и домен храним «перевёрнутыми», чтобы их не было видно простым парсерам
-        const u = "veirak".split("").reverse().join(""); // "you"
-        const d = "ed.bew".split("").reverse().join(""); // "example.com"
+  const u = "veirak".split("").reverse().join("");  
+  const d = "ed.bew".split("").reverse().join("");  
+  const email = `${u}@${d}`;
 
-        const subject = "Collaboration request";
-        const body =
-          "Hello Eugene,\n\nI saw your landing and would like to discuss a project.";
+  const subject = "Collaboration request";
+  const body = "Hello Eugene,\n\nI saw your landing and would like to discuss a project.";
 
-        function makeMailto() {
-          return (
-            "mailto:" +
-            u +
-            "@" +
-            d +
-            "?subject=" +
-            encodeURIComponent(subject) +
-            "&body=" +
-            encodeURIComponent(body)
-          );
-        }
+  const params = new URLSearchParams({
+    to: email, 
+    subject,
+    body
+  });
 
-        link.addEventListener(
-          "click",
-          (e) => {
-            e.preventDefault();
-            const mailto = makeMailto();
-            link.setAttribute("href", mailto); // задаём href «в последний момент»
-            window.location.href = mailto; // и переходим
-          },
-          { once: true }
-        );
-      })();
+   
+  const mailto = `mailto:${email}?${params.toString()}`;
+
+  link.setAttribute("href", mailto);
+})();
