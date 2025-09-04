@@ -1,0 +1,56 @@
+body {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
+        background: #00c3c3;
+        color: white;
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+      h1 {
+        font-size: 8em;
+        letter-spacing: -12px;
+      }
+      h1 span {
+        display: inline-block;
+        animation: wave 2s infinite;
+      }
+      h1 span:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      h1 span:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+      @keyframes wave {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+      p {
+        font-size: 1.2em;
+        margin-top: -85px;
+        max-width: 600px;
+      }
+      .btn-primary {
+        background: #00c3c3; /* фон как у body */
+        color: #ffffff;
+        border: 2px solid #ffffff; /* белая рамка */
+        font-weight: 600;
+        padding: 10px 24px;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        box-shadow: rgb(255, 255, 255) 0 0px 0px 2px inset;
+        text-decoration: none;
+      }
+
+      .btn-primary:hover {
+        background: rgba(255, 255, 255, 0.1);
+        text-decoration: underline;
+      }
