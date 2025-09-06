@@ -25,12 +25,12 @@ body {
 .btn-primary {
   background: #00c3c3;
   color: #ffffff;
-  border: 2px solid #ffffff;
   font-weight: 600;
   padding: 10px 24px;
   border-radius: 6px;
   transition: all 0.3s ease;
-  box-shadow: rgb(255, 255, 255) 0 0px 0px 2px inset;
+  border:1px solid transparent; /* или 0; но 1px прозрачно помогает с layout */
+  box-shadow:0 0 0 1.9px rgba(255,255,255,.6) inset; /* или не inset: 0 0 0 2px ... */
   text-decoration: none;
 }
 .btn-primary:hover {
