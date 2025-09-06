@@ -14,7 +14,7 @@
       content="Custom websites and web apps—frontend polish, backend reliability, CI/CD, analytics, and support after launch."
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="canonical" href="https://example.com/" />
+    <!-- <link rel="canonical" href="https://example.com/" /> -->
     <!-- Open Graph -->
     <meta property="og:title" content="Create your Idea!" />
     <meta
@@ -22,29 +22,105 @@
       content="Custom websites and web apps—frontend polish, backend reliability, CI/CD, analytics, and support after launch."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://example.com/" />
-    <meta property="og:image" content="favicon-32.png" />
+    <!-- <meta property="og:url" content="https://example.com/" /> -->
+    <!-- <meta property="og:image" content="https://your-domain.example/og-banner-1200x630.jpg" /> -->
+    <!-- <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" /> 
+    <meta property="og:image:alt" content="Portfolio preview" /> -->
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Create your Idea!" />
+    <!-- <meta name="twitter:image" content="https://your-domain.example/og-banner-1200x630.jpg" /> -->
     <meta
       name="twitter:description"
       content="Custom websites and web apps—frontend polish, backend reliability, CI/CD, analytics, and support after launch."
     />
   </head>
-  <body>
-    <h1><span>C</span><span>R</span><span>E</span>ATE</h1>
-    <p>
-      Creating exciting projects with creativity and passion. Open to new ideas
-      and collaboration.
-    </p>
-    <a
-      class="btn btn-primary"
-      id="contactLink"
-      href="#"
-      aria-label="Contact via email"
-      >Contact</a
-    >
+  <body class="snap">
+    <!-- HERO -->
+    <section id="hero" class="section hero">
+      <div class="container">
+        <h1 class="logo"><span>C</span><span>R</span><span>E</span>ATE</h1>
+        <p class="tagline">
+          Creating exciting projects with creativity and passion. Open to new
+          ideas and collaboration.
+        </p>
+        <a class="btn btn-primary" id="contactLink" href="#contact-section">
+          Contact
+        </a>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact-section" class="section contact">
+      <div class="container">
+        <div class="letter-wrap">
+          <form
+            id="contact"
+            action="https://formspree.io/f/mldwoaje"
+            method="POST"
+            class="letter"
+          >
+            <h2 class="letter-title">CONTACT ME</h2>
+
+            <label for="name">Name*</label>
+            <input
+              id="name"
+              type="text"
+              name="name"
+              required
+              minlength="2"
+              maxlength="60"
+              autocomplete="name"
+              placeholder="Your Name"
+            />
+
+            <label for="email">Email*</label>
+            <input
+              id="email"
+              type="email"
+              name="email"
+              required
+              autocomplete="email"
+              placeholder="your@email.com"
+            />
+
+            <div class="label-row">
+              <label for="message"
+                >Message*
+                <span class="muted">(up to 300 characters)</span></label
+              >
+              <span id="msgCount" class="count">0/300</span>
+            </div>
+            <textarea
+              id="message"
+              name="message"
+              required
+              maxlength="300"
+              placeholder="Your message"
+            ></textarea>
+
+            <!-- honeypot (spam trap) -->
+            <input
+              type="text"
+              name="_gotcha"
+              tabindex="-1"
+              autocomplete="off"
+              style="display: none"
+            />
+            <input type="hidden" name="_subject" value="Portfolio contact" />
+
+            <button type="submit" class="btn btn-primary">Send</button>
+            <p id="status" aria-live="polite"></p>
+          </form>
+        </div>
+
+        <a class="btn btn-primary back-to-top" href="#hero" aria-label="Back to top"
+          >Back to top</a
+        >
+      </div>
+    </section>
+
     <noscript>Please enable JavaScript to connect.</noscript>
     <script src="js/app.js?v=1" defer></script>
   </body>

@@ -1,22 +1,13 @@
-(() => {
+document.addEventListener("DOMContentLoaded", () => {
   const link = document.getElementById("contactLink");
-  if (!link) return;
+  const target = document.getElementById("contact-section");
+  if (!link || !target) return;
 
-  const u = "veirak".split("").reverse().join("");  
-  const d = "ed.bew".split("").reverse().join("");  
-  const email = `${u}@${d}`;
+  link.setAttribute("href", "#contact-section");
 
-  const subject = "";
-  const body = "";
-
-  const params = new URLSearchParams({
-    to: email, 
-    subject,
-    body
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+    history.replaceState(null, "", "#contact-section");
   });
-
-   
-  const mailto = `mailto:${email}?${params.toString()}`;
-
-  link.setAttribute("href", mailto);
-})();
+});

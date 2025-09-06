@@ -1,56 +1,154 @@
+html {
+  scroll-behavior: smooth;
+}
 body {
-        margin: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        height: 100vh;
-        background: #00c3c3;
-        color: white;
-        font-family: Arial, sans-serif;
-        text-align: center;
-      }
-      h1 {
-        font-size: 8em;
-        letter-spacing: -12px;
-      }
-      h1 span {
-        display: inline-block;
-        animation: wave 2s infinite;
-      }
-      h1 span:nth-child(2) {
-        animation-delay: 0.2s;
-      }
-      h1 span:nth-child(3) {
-        animation-delay: 0.4s;
-      }
-      @keyframes wave {
-        0%,
-        100% {
-          transform: translateY(0);
-        }
-        50% {
-          transform: translateY(-10px);
-        }
-      }
-      p {
-        font-size: 1.2em;
-        margin-top: -85px;
-        max-width: 600px;
-      }
-      .btn-primary {
-        background: #00c3c3; /* фон как у body */
-        color: #ffffff;
-        border: 2px solid #ffffff; /* белая рамка */
-        font-weight: 600;
-        padding: 10px 24px;
-        border-radius: 6px;
-        transition: all 0.3s ease;
-        box-shadow: rgb(255, 255, 255) 0 0px 0px 2px inset;
-        text-decoration: none;
-      }
-
-      .btn-primary:hover {
-        background: rgba(255, 255, 255, 0.1);
-        text-decoration: underline;
-      }
+  margin: 0;
+  background: #00c3c3;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+@keyframes wave {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+.tagline {
+  font-size: 1.2em;
+  margin: 16px auto 24px;
+  max-width: 600px;
+}
+.btn-primary {
+  background: #00c3c3;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  font-weight: 600;
+  padding: 10px 24px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  box-shadow: rgb(255, 255, 255) 0 0px 0px 2px inset;
+  text-decoration: none;
+}
+.btn-primary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  text-decoration: underline;
+}
+.snap {
+  scroll-snap-type: y mandatory;
+}
+.section {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: clamp(16px, 5vw, 56px);
+  scroll-snap-align: start;
+}
+.container {
+  width: min(1100px, 92vw);
+  text-align: center;
+}
+.logo {
+  font-size: clamp(56px, 12vw, 160px);
+  letter-spacing: -0.09em;
+  margin: 0;
+}
+.logo span {
+  display: inline-block;
+  animation: wave 2s infinite;
+}
+.logo span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.logo span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+.contact {
+  background: linear-gradient(180deg, var(--bg2), #008f93);
+}
+.letter-wrap {
+  position: relative;
+  width: min(720px, 94vw);
+  margin: 0 auto;
+  padding: 0px;
+}
+.letter-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  pointer-events: none;
+}
+.letter {
+  position: relative;
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 14px;
+  padding: clamp(18px, 4vw, 28px);
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 12px;
+  text-align: left;
+}
+.letter::after {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border-radius: 10px;
+  border: 2px solid #e6f2f2;
+  pointer-events: none;
+}
+.letter-title {
+  margin: 0 0 0.5rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  font-size: clamp(22px, 3.2vw, 28px);
+  color: #0b6d71;
+}
+.letter .btn-primary {
+  display: inline-block;
+  width: auto;
+  margin-left: auto;
+}
+label {
+  font-weight: 700;
+}
+.label-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+.muted {
+  color: #6b8a8c;
+  font-weight: 600;
+}
+.count {
+  font-size: 0.9rem;
+  color: #0a6a6e;
+}
+input,
+textarea {
+  background: var(--muted);
+  border: 2px solid rgba(230, 242, 242, 0.6);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font: inherit;
+  color: var(--ink);
+  outline: none;
+}
+textarea {
+  min-height: clamp(180px, 12vh, 100px);
+  resize: vertical;
+}
+.back-to-top {
+  margin-top: 24px;
+  display: inline-block;
+}
+.back-to-top:hover {
+  background: rgba(255, 255, 255, 0.1);
+  text-decoration: underline;
+}
