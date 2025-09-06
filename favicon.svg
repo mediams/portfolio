@@ -1,4 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="12" ry="12" fill="#2d7cff"/>
-  <text x="50%" y="55%" text-anchor="middle" font-size="36" font-family="Arial" fill="#ffffff">L</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="#0F172A"/>
+  <path d="M108 256 L168 196" stroke="#7DD3FC" stroke-width="56" stroke-linecap="round"/>
+  <path d="M108 256 L168 316" stroke="#7DD3FC" stroke-width="56" stroke-linecap="round"/>
+  <line x1="212" y1="128" x2="212" y2="384" stroke="#FFFFFF" stroke-width="56" stroke-linecap="round"/>
+  <line x1="230" y1="256" x2="372" y2="128" stroke="#38BDF8" stroke-width="56" stroke-linecap="round"/>
+  <line x1="230" y1="256" x2="372" y2="384" stroke="#38BDF8" stroke-width="56" stroke-linecap="round"/>
 </svg>
