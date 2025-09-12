@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>API Docs / Swagger</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://unpkg.com">
+  <link rel="dns-prefetch" href="https://unpkg.com">
+  <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@5/swagger-ui.css" />
+  <style>
+    body { margin: 0; }
+    /* Loading overlay */
+    #loading-overlay {
+      position: fixed; inset: 0; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 16px;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      background: #0b1015; color: #e6edf3; z-index: 9999;
+    }
+    .spinner {
+      width: 54px; height: 54px; border-radius: 50%;
+      border: 6px solid rgba(255,255,255,.15);
+      border-top-color: #61dafb; /* default swagger blue-ish */
+      animation: spin 0.9s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .subtitle { opacity: .8; font-size: 14px; }
+    .hint { opacity: .6; font-size: 12px; }
+    .btn {
+      margin-top: 6px; padding: 8px 12px; border-radius: 10px; border: 1px solid #2d333b;
+      background: #151b23; color: #e6edf3; cursor: pointer;
+    }
+    .btn:hover { filter: brightness(1.1); }
+    /* Hide overlay when ready */
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <div id="loading-overlay">
+    <div class="spinner" aria-hidden="true"></div>
+    <h2 id="loading-title">Waking up the server…</h2>
+    <div class="subtitle" id="loading-subtitle">It had a tiny nap on Railway. Please hold on.</div>
+    <div class="hint" id="loading-hint">Attempt <span id="try">1</span> — <span id="quip">Brewing coffee for containers…</span></div>
+    <button id="retry-btn" class="btn hidden">Try again</button>
+  </div>
+
+  <div id="swagger-ui"></div>
+
+  <script src="https://unpkg.com/swagger-ui-dist@5/swagger-ui-bundle.js"></script>
+  <script src="https://unpkg.com/swagger-ui-dist@5/swagger-ui-standalone-preset.js"></script>
+  <script>
+    // === CONFIG ===
+    const API_DOCS_URL = "https://onlineshopgarden-production.up.railway.app/v3/api-docs"; 
+
+    const MAX_RETRIES = 40; 
+    const RETRY_DELAY = 1500; 
+
+    const overlay = document.getElementById('loading-overlay');
+    const tryEl   = document.getElementById('try');
+    const quipEl  = document.getElementById('quip');
+    const retryBtn= document.getElementById('retry-btn');
+
+    const quips = [
+      "Brewing coffee for containers…",
+      "Politely pinging the sleepy pods…",
+      "Teaching hamsters to run faster…",
+      "Unpacking bytes, ironing headers…",
+      "Spinning up gears and gizmos…",
+      "Loading APIs like it's 1999…",
+      "Knocking on Railway’s door…"
+    ];
+
+    function setQuip(i){ quipEl.textContent = quips[i % quips.length]; }
+
+    async function wait(ms){ return new Promise(r => setTimeout(r, ms)); }
+
+    async function probeDocs(attempt = 1){
+      tryEl.textContent = attempt;
+      setQuip(attempt);
+      const res = await fetch(API_DOCS_URL, {
+        method: 'GET',
+        headers: { 'accept': 'application/json' },
+        cache: 'no-store'
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const ct = (res.headers.get('content-type') || '').toLowerCase();
+      if (!ct.includes('application/json') && !ct.includes('yaml')) {
+      }
+      return true;
+    }
+
+    async function boot(){
+      for (let i = 1; i <= MAX_RETRIES; i++){
+        try {
+          const ok = await probeDocs(i);
+          if (ok) break;
+        } catch (e) {
+          if (i === MAX_RETRIES){
+            document.getElementById('loading-title').textContent = "Still waking up…";
+            document.getElementById('loading-subtitle').textContent =
+              "The server took too long to respond. You can try again.";
+            retryBtn.classList.remove('hidden');
+            retryBtn.onclick = () => location.reload();
+            return;
+          }
+          await wait(RETRY_DELAY);
+          continue;
+        }
+        break;
+      }
+
+      overlay.classList.add('hidden');
+      window.ui = SwaggerUIBundle({
+        url: API_DOCS_URL,
+        dom_id: "#swagger-ui",
+        deepLinking: true,
+        presets: [SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset],
+        layout: "StandaloneLayout"
+      });
+    }
+
+    boot();
+  </script>
+</body>
+</html>

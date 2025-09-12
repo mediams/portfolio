@@ -1,12 +1,38 @@
+:root {
+  --card-w: clamp(800px, 70vw, 1100px);
+  --card-h: min(70vh, 800px);
+  --gap: 24px;
+  --radius: 18px;
+  --muted: #cbd5e1;
+  --accent: #60a5fa;
+  --left-w: 34%;
+  --bg2: #05a4a8;
+  --paper: #e6f2f2;
+  --ink: #0b3a3d;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  --surface: rgba(255, 255, 255, 0.03);
+  --scrollbar-size: 12px;
+  --scrollbar-track: rgba(255, 255, 255, 0.18);
+  --scrollbar-thumb: rgba(11, 109, 113, 0.88);
+  --scrollbar-thumb-hover: #0b6d71;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 html {
   scroll-behavior: smooth;
 }
 body {
   margin: 0;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial,
+    sans-serif;
   background: #00c3c3;
   color: #fff;
-  font-family: Arial, sans-serif;
-  text-align: center;
 }
 @keyframes wave {
   0%,
@@ -29,13 +55,18 @@ body {
   padding: 10px 24px;
   border-radius: 6px;
   transition: all 0.3s ease;
-  border:1px solid transparent; /* или 0; но 1px прозрачно помогает с layout */
-  box-shadow:0 0 0 1.9px rgba(255,255,255,.6) inset; /* или не inset: 0 0 0 2px ... */
+  border: 1px solid transparent;
+  box-shadow: 0 0 0 1.9px rgba(255, 255, 255, 0.6) inset;
   text-decoration: none;
 }
 .btn-primary:hover {
   background: rgba(255, 255, 255, 0.1);
   text-decoration: underline;
+}
+.btn-primary:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 1.9px rgba(255, 255, 255, 0.6) inset,
+    0 0 0 3px rgba(11, 109, 113, 0.35);
 }
 .snap {
   scroll-snap-type: y mandatory;
@@ -66,29 +97,17 @@ body {
 .logo span:nth-child(3) {
   animation-delay: 0.4s;
 }
-.contact {
-  background: linear-gradient(180deg, var(--bg2), #008f93);
-}
 .letter-wrap {
   position: relative;
   width: min(720px, 94vw);
   margin: 0 auto;
   padding: 0px;
 }
-.letter-wrap::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 8px;
-  pointer-events: none;
-}
 .letter {
   position: relative;
-  background: var(--paper);
-  color: var(--ink);
   border-radius: 14px;
   padding: clamp(18px, 4vw, 28px);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow, 0 10px 30px rgba(0, 0, 0, 0.2));
   display: grid;
   gap: 12px;
   text-align: left;
@@ -109,7 +128,7 @@ body {
   color: #0b6d71;
 }
 .letter .btn-primary {
-  display: inline-block;
+  display: block;
   width: auto;
   margin-left: auto;
 }
@@ -137,11 +156,16 @@ textarea {
   border-radius: 12px;
   padding: 12px 14px;
   font: inherit;
-  color: var(--ink);
+  color: var(--ink, #0b3a3d);
   outline: none;
 }
+input:focus-visible,
+textarea:focus-visible {
+  border-color: #bde4e4;
+  box-shadow: 0 0 0 3px rgba(11, 109, 113, 0.25);
+}
 textarea {
-  min-height: clamp(180px, 12vh, 100px);
+  min-height: clamp(100px, 12vh, 180px);
   resize: vertical;
 }
 .back-to-top {
@@ -151,4 +175,188 @@ textarea {
 .back-to-top:hover {
   background: rgba(255, 255, 255, 0.1);
   text-decoration: underline;
+}
+.sectionresume {
+  width: var(--card-w);
+  height: var(--card-h);
+  display: grid;
+  grid-template-columns: var(--left-w) 1fr;
+}
+.left {
+  position: relative;
+  padding: 20px;
+}
+.left h2 {
+  margin: 0 0 -10px;
+  font-size: 2.5rem;
+  letter-spacing: 0.2px;
+}
+.left h3 {
+  margin: 0 0 0px;
+  font-size: 1rem;
+  letter-spacing: 0.2px;
+}
+.left li::marker {
+  content: "- ";
+}
+.left p {
+  margin: 0 0 12px;
+  opacity: 0.9;
+}
+.left .meta {
+  margin-top: auto;
+  font-size: 12px;
+  opacity: 0.75;
+}
+.right {
+  height: 100%;
+  overflow: auto;
+  padding-right: 8px;
+}
+.block {
+  border: 1px solid rgba(255, 255, 255, 0.425);
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 16px;
+  background: rgba(255, 255, 255, 0.02);
+}
+.block h3 {
+  margin: 0 0 6px;
+  font-size: 18px;
+}
+.tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(182, 214, 253, 0.35);
+  margin-right: 6px;
+}
+@media (max-width: 900px) {
+  :root {
+    --card-w: min(94vw, 900px);
+  }
+  .section {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  .left {
+    position: relative;
+    top: auto;
+    height: auto;
+    margin-bottom: var(--gap);
+  }
+  .right {
+    max-height: 60vh;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .logo span {
+    animation: none;
+  }
+}
+/* Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: var(--scrollbar-size);
+  height: var(--scrollbar-size);
+}
+*::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+  border-radius: 999px;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
+/* Firefox */
+html,
+body,
+.right,
+textarea {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+html {
+  scrollbar-gutter: stable;
+}
+.icons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+  padding: 8px;
+}
+
+.icons img,
+.img {
+  background: rgba(255, 255, 255, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.445);
+  border-radius: 12px;
+  padding: 6px;
+  width: 50px;
+  height: 50px;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.img {
+  fill: #6db33f;
+}
+#railway {
+  fill: #0b0d0e;
+}
+
+.icons img:hover,
+.img:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.08);
+}
+#contactLinkLeft {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+.link-with-arrow {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.pfeil {
+  width: 1em;
+  height: 1em;
+  margin-left: 6px;
+  vertical-align: middle;
+  transition: transform 0.2s ease;
+}
+
+.link-with-arrow:hover .pfeil {
+  transform: scale(1.5);
+}
+h3 a:hover {
+  text-decoration: underline;
+}
+li a {
+  color: white;
+  text-decoration: none;
+}
+li a:hover {
+  text-decoration: underline;
+}
+ul {
+  margin: 0px;
+}
+.imgLittle {
+  width: 1.5em;
+  fill: white;
+}
+a {
+  text-decoration: none;
 }

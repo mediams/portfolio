@@ -36,7 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
           statusEl.textContent = "Thank you! Your message has been sent.";
           form.reset();
         } else {
-          // Пытаемся вытащить текст ошибки из JSON Formspree
           let msg = "Failed to submit the form. Please try again later.";
           try {
             const { errors } = await resp.json();
@@ -55,7 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // (необязательно) счётчик символов для сообщения
   const msg = document.getElementById("message");
   const msgCount = document.getElementById("msgCount");
   if (msg && msgCount) {
@@ -64,3 +62,24 @@ document.addEventListener("DOMContentLoaded", () => {
     update();
   }
 });
+(function () {
+  const right = document.querySelector('.right');
+  if (!right) return;
+
+  document.querySelectorAll('.side-nav[data-target]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const sel = link.getAttribute('data-target');
+      const target = document.querySelector(sel);
+      if (!target) return;
+
+      const top = target.getBoundingClientRect().top
+                - right.getBoundingClientRect().top
+                + right.scrollTop;
+
+      right.scrollTo({ top, behavior: 'smooth' });
+    });
+  });
+})();
+
+
