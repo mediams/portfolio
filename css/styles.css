@@ -15,6 +15,7 @@
   --scrollbar-track: rgba(255, 255, 255, 0.18);
   --scrollbar-thumb: rgba(11, 109, 113, 0.88);
   --scrollbar-thumb-hover: #0b6d71;
+  --nav-h: 56px;
 }
 *,
 *::before,
@@ -23,6 +24,7 @@
 }
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-h);
 }
 body {
   margin: 0;
@@ -84,7 +86,7 @@ body {
 }
 .logo {
   font-size: clamp(56px, 12vw, 160px);
-  letter-spacing: -0.09em;
+  letter-spacing: -0.10em;
   margin: 0;
 }
 .logo span {
@@ -214,7 +216,6 @@ textarea {
   padding-right: 8px;
 }
 .block {
-  border: 1px solid rgba(255, 255, 255, 0.425);
   border-radius: 12px;
   padding: 18px;
   margin-bottom: 16px;
@@ -359,4 +360,66 @@ ul {
 }
 a {
   text-decoration: none;
+}
+.block {
+  padding-top: 0;
+}
+#projects {
+  border: 1px solid rgba(255, 255, 255, 0.425);
+}
+/* ====== Top Navigation ====== */
+@media (max-width: 600px) {
+  :root {
+    --nav-h: 64px;
+  }
+}
+.top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(1px);
+}
+
+.nav-wrap {
+  width: min(1100px, 92vw);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 4px;
+}
+
+.brand {
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: #fff;
+  text-decoration: none;
+}
+
+.links {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-link {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #ffffff;
+  /* border: 1px solid rgba(255, 255, 255, 0.35); */
+  /* background: rgba(255, 255, 255, 0.06); */
+  transition: transform 0.15s ease, background 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link:focus-visible {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.12);
+  outline: none;
+}
+section,
+[id] {
+  scroll-margin-top: var(--nav-h);
 }

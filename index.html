@@ -10,6 +10,15 @@
     <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png" />
     <link rel="icon" href="favicon-16.png" sizes="16x16" type="image/png" />
     <link rel="alternate icon" sizes="32x32" href="favicon-32.png" />
+    <link
+      rel="dns-prefetch"
+      href="https://onlineshopgarden-production.up.railway.app"
+    />
+    <link
+      rel="preconnect"
+      href="https://onlineshopgarden-production.up.railway.app"
+      crossorigin
+    />
     <!-- SEO -->
     <meta
       name="description"
@@ -39,6 +48,17 @@
     />
   </head>
   <body class="snap">
+    <!-- NAV -->
+    <nav class="top-nav" aria-label="Primary">
+      <div class="nav-wrap">
+        <a href="#hero" class="brand"> </a>
+        <div class="links">
+          <a href="#hero" class="nav-link">Home</a>
+          <a href="#resume" class="nav-link">About</a>
+          <a href="#contact-section" class="nav-link">Contact</a>
+        </div>
+      </div>
+    </nav>
     <!-- HERO -->
     <section id="hero" class="section hero">
       <div class="container">
@@ -59,6 +79,7 @@
     </section>
     <!-- CAREER / RESUME -->
     <section
+      id="resume"
       class="sectionresume"
       aria-label="Resume section with a sticky left column"
     >
@@ -133,7 +154,7 @@
 
       <!-- Right column — scrollable area inside the block -->
       <div class="right">
-        <div id="about" class="block" style="padding-top: 0; border: 0">
+        <div id="about" class="block">
           <p>
             Programming is not just a skill for me, it is my true passion. I
             enjoy writing code, solving problems, and constantly discovering new
@@ -318,7 +339,6 @@
               </li>
             </ul>
           </section>
-
           <section id="stack">
             <p></p>
             <h3><span class="bar"></span>Technologies &amp; Tools</h3>
@@ -363,7 +383,6 @@
               </div>
             </div>
           </section>
-
           <section id="methods">
             <h3><span class="bar"></span>Work Methods</h3>
             <ul>
@@ -376,7 +395,6 @@
         </div>
       </div>
     </section>
-
     <!-- Extra page content to test "stickiness" when scrolling the whole page -->
     <div style="height: 40vh"></div>
     <!-- CONTACT -->
@@ -390,7 +408,6 @@
             class="letter"
           >
             <h2 class="letter-title">CONTACT ME</h2>
-
             <label for="name">Name*</label>
             <input
               id="name"

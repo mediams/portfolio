@@ -63,23 +63,55 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 (function () {
-  const right = document.querySelector('.right');
+  const right = document.querySelector(".right");
   if (!right) return;
 
-  document.querySelectorAll('.side-nav[data-target]').forEach(link => {
-    link.addEventListener('click', (e) => {
+  document.querySelectorAll(".side-nav[data-target]").forEach((link) => {
+    link.addEventListener("click", (e) => {
       e.preventDefault();
-      const sel = link.getAttribute('data-target');
+      const sel = link.getAttribute("data-target");
       const target = document.querySelector(sel);
       if (!target) return;
 
-      const top = target.getBoundingClientRect().top
-                - right.getBoundingClientRect().top
-                + right.scrollTop;
+      const top =
+        target.getBoundingClientRect().top -
+        right.getBoundingClientRect().top +
+        right.scrollTop;
 
-      right.scrollTo({ top, behavior: 'smooth' });
+      right.scrollTo({ top, behavior: "smooth" });
     });
   });
 })();
+// === Wake Railway app early ===
+const WAKE_URL =
+  "https://onlineshopgarden-production.up.railway.app/actuator/health";
 
+function wakeRailway(reason = "load") {
+  fetch(WAKE_URL + "?t=" + Date.now() + "&reason=" + reason, {
+    method: "GET",
+    mode: "no-cors",
+    cache: "no-store",
+    keepalive: true,
+  }).catch(() => {
+    /*   */
+  });
 
+  const img = new Image();
+  img.referrerPolicy = "no-referrer";
+  img.src = WAKE_URL + "?img=1&t=" + Date.now() + "&reason=" + reason;
+  setTimeout(() => {
+    img.remove && img.remove();
+  }, 5000);
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  wakeRailway("domcontentloaded");
+});
+
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible") {
+    wakeRailway("tab_visible");
+  }
+});
+
+window.addEventListener("online", () => wakeRailway("online"));
