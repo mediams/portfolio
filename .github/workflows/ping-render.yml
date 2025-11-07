@@ -19,7 +19,7 @@ jobs:
     steps:
       - name: Ping health (preferred)
         run: |
-          URL="https://onlineshopgarden.onrender.com/actuator/health"
+          URL="https://onlineshopgarden.onrender.com/api/products/all"
           for i in 1 2 3; do
             echo "Attempt $i: $URL"
             if curl -sSfL --max-time 20 -A "keepalive-bot/1.0" "$URL" -o /dev/null; then
