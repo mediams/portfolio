@@ -1,0 +1,24 @@
+<!-- favicon.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24">
+  <defs>
+    <!-- Синий → фиолетовый, как на скрине -->
+    <linearGradient id="g" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#3b82f6"></stop>
+      <stop offset="1" stop-color="#a855f7"></stop>
+    </linearGradient>
+    <!-- Мягкая тень, как у кнопки -->
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="1" stdDeviation="1.2" flood-opacity="0.25"></feDropShadow>
+    </filter>
+  </defs>
+
+  <!-- Скруглённый фон с градиентом -->
+  <rect width="24" height="24" rx="6" fill="url(#g)" filter="url(#shadow)"></rect>
+
+  <!-- Белая иконка "код" (lucide) -->
+  <g fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M18 16l4-4-4-4"></path>
+    <path d="M6 8l-4 4 4 4"></path>
+    <path d="M14.5 4l-5 16"></path>
+  </g>
+</svg>
